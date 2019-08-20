@@ -12,7 +12,7 @@ function Issues() {
       <Layout className="layout">
         <Header className="header">
           <span>Issues App</span>
-          <Link to="/SignUp"><Icon className="icon" type="poweroff" /></Link>
+          <Link to="/"><Icon className="icon" type="poweroff" /></Link>
         </Header>
         <Details />
       </Layout>

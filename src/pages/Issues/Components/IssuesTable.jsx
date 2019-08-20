@@ -20,8 +20,8 @@ function IssuesTable(props) {
           )}
         />
         <Column title="Action" key="action"
-          render={(x, y, index) => (
-            <button type="button" onClick={() => props.deleteIssue(index)}>
+          render={(x, row, index) => (
+            <button type="button" onClick={() => props.deleteIssue(row._id)}>
               Delete
               </button>)}
         />

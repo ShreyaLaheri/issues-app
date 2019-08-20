@@ -1,28 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Icon, Button, Input } from 'antd';
 import AddIssue from './AddIssue';
 import IssuesTable from './IssuesTable'
+import client from '../../../client'
 
 function Details() {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
   const [issues, setIssues] = useState([]);
 
-  const addIssue = (title, desc1, tags) => {
+
+  useEffect(() => {
+    // Acts as ComponentDidMount
+    client.getIssues().then(res => {
+      if (!res.ack) {
+        alert('Could not update todo');
+        return;
+      }
+      console.log('Issues:', res.issues)
+      setIssues(res.issues);
+    })
+  }, []);
+
+  const addIssue = (title, desc, tags) => {
     var issue = {
       title: title,
-      desc: desc1,
+      desc: desc,
       tags: tags,
     }
-    setIssues([...issues, issue])
+    client.addIssue(title, desc, tags).then(res => {
+      if (!res.ack) {
+        alert('Could not add issue');
+        return;
+      }
+      setIssues([...issues, issue])
+    })
   };
 
-  const filterIssues = issues.filter(item => {
-    return item.title.includes(value) || item.desc.includes(value)
-  })
+  const deleteIssue = id => {
+    client.deleteIssue(id).then(res => {
+      if (!res.ack) {
+        alert('Could not delete issue');
+        return;
+      }
+      setIssues(issues.filter((i, j) => id !== i._id));
+      console.log(issues)
+    })
+  }
 
-  const deleteIssue = i => {
-    return issues.filter((item, j) => i !== j);
+  const searchIssue = (e,value) => {
+    console.log('Searching issues')
+    if (e.key === 'Enter') {
+      client.searchIssue(value).then(res => {
+        if (!res.ack) {
+          alert('Could not search issue');
+          return;
+        }
+        setIssues(res.issues);
+      })
+    }
   }
 
   return (
@@ -42,12 +78,12 @@ function Details() {
         placeholder="Search"
         style={{ width: 450 }}
         onChange={(e) => setValue(e.target.value)}
-        value={value}
+        onKeyDown={(e) => searchIssue(e, value)}
       /><br />
 
       <AddIssue visible={visible} hideModal={() => setVisible(false)} addIssue={addIssue} />
 
-      <IssuesTable issues={filterIssues} deleteIssue={deleteIssue} />
+      <IssuesTable issues={issues} deleteIssue={deleteIssue} />
     </div>
   );
 }
