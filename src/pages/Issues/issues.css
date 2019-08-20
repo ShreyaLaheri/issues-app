@@ -1,0 +1,74 @@
+.header {
+  background: #EEE;
+}
+
+.content {
+  background: #FFF;
+  padding: 0 88px;
+}
+
+.header>span {
+  color: #000;
+  font-size: 20px;
+  float: left;
+}
+
+.icon {
+  float: right;
+  font-size: 26px;
+  color: #000;
+  margin-top: 18px;
+}
+
+.tFlex {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  align-items: center;
+  padding-bottom: 24px;
+}
+
+.mText>span {
+  float: left;
+}
+
+.project {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.title {
+  color: #bdbdbd;
+  font-size: 14px;
+}
+
+.tFlex>button {
+  height: 35px;
+  padding: 0 25px;
+}
+
+.search {
+  float: left;
+  margin-bottom: 48px; 
+}
+
+.add-title {
+  width: 75%;
+  margin: 0 0 24px 56px;
+}
+
+.add-desc {
+  width: 75%;
+  margin: 0 0 24px 12px;
+}
+
+.add-tags {
+  width: 75%;
+  margin-left: 52px;
+}
+
+.list-tags {
+  padding: 16px 0 0 88px;
+}
+
