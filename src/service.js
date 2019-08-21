@@ -4,6 +4,7 @@ class Service {
   constructor(projectId, url) {
     this.api = new API(projectId, url);
     this.db = this.api.Mongo();
+    this.isLoggedIn = false
   }
 
   async login(username, pass) {
@@ -21,6 +22,7 @@ class Service {
     // Store the userId for further operation
     this.userId = res.data.user._id;
 
+    this.isLoggedIn = true;
     return { ack: true };
   }
 
@@ -39,6 +41,7 @@ class Service {
     // Store the userId for further operation
     this.userId = res.data.user._id;
 
+    this.isLoggedIn = true;
     return { ack: true };
   }
 

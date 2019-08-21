@@ -28,6 +28,12 @@ p {
   margin: 0 auto;
 }
 
+@media only screen and (max-width: 600px) {
+  .Card {
+    width: 90% !important;
+  }
+}
+
 .close {
   color: #2196f3;
   float: right;
